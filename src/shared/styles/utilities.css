@@ -1,0 +1,173 @@
+@layer utilities {
+  .is-hidden {
+    display: none;
+  }
+
+  /* Unified Inter typography everywhere; tabular numerals for aligned metrics */
+  .tnum,
+  .font-mono {
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+  }
+
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .crisp-stroke {
+    vector-effect: non-scaling-stroke;
+    shape-rendering: geometricprecision;
+  }
+
+  .pixel-stroke {
+    vector-effect: non-scaling-stroke;
+    shape-rendering: crispedges;
+  }
+
+  .art-xray {
+    opacity: 0.42;
+  }
+
+  .render-crisp-1x {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  .bg-checkers {
+    background-image:
+      linear-gradient(45deg, var(--checker-tint) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--checker-tint) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--checker-tint) 75%),
+      linear-gradient(-45deg, transparent 75%, var(--checker-tint) 75%);
+    background-position:
+      0 0,
+      0 0.375rem,
+      0.375rem -0.375rem,
+      -0.375rem 0;
+    background-size: 0.75rem 0.75rem;
+  }
+
+  .app-scroll::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+
+  .app-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .app-scroll::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: var(--radius-full);
+  }
+
+  .app-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+
+  .sr-clipboard-proxy {
+    position: fixed;
+    inset-inline-start: -1000rem;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .svg-measure-stage {
+    position: fixed;
+    inset-block-start: -1000rem;
+    inset-inline-start: -1000rem;
+    visibility: hidden;
+    width: 6.25rem;
+    height: 6.25rem;
+    pointer-events: none;
+  }
+
+  /* Semantic Status Text Utilities */
+  .tone-success {
+    color: var(--status-success);
+  }
+
+  .tone-warning {
+    color: var(--status-warning);
+  }
+
+  .tone-danger {
+    color: var(--status-danger);
+  }
+
+  .tone-faint {
+    color: var(--ink-faint);
+  }
+
+  /* Guide Icon Color Bindings */
+  .guide-color-safe-zone {
+    color: var(--guide-safe-zone);
+  }
+
+  .guide-color-circle {
+    color: var(--guide-circle);
+  }
+
+  .guide-color-square {
+    color: var(--guide-square);
+  }
+
+  .guide-color-rect-h {
+    color: var(--guide-rect-h);
+  }
+
+  .guide-color-rect-v {
+    color: var(--guide-rect-v);
+  }
+
+  .guide-color-harmonic {
+    color: var(--guide-harmonic);
+  }
+
+  .guide-color-concentric {
+    color: var(--guide-concentric);
+  }
+
+  .guide-color-rays {
+    color: var(--guide-rays);
+  }
+
+  .guide-color-thirds {
+    color: var(--guide-thirds);
+  }
+
+  .guide-color-axes {
+    color: var(--guide-axes);
+  }
+
+  .guide-color-diagonals {
+    color: var(--guide-diagonals);
+  }
+
+  .guide-color-pixel {
+    color: var(--guide-pixel);
+  }
+
+  .guide-color-illustration {
+    color: var(--guide-illustration);
+  }
+
+  .qa-color-subpixel {
+    color: var(--qa-subpixel);
+  }
+
+  .qa-color-optical-bounds {
+    color: var(--qa-optical-bounds);
+  }
+
+  .qa-color-optical-center {
+    color: var(--qa-optical-center);
+  }
+
+  .qa-color-bleed {
+    color: var(--qa-bleed);
+  }
+}

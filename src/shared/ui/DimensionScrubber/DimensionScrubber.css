@@ -1,0 +1,49 @@
+@layer components {
+  /* --- Dimension Scrubber --- */
+  .dim-scrubber {
+    position: relative;
+    display: flex;
+    flex: 1 1 0;
+    gap: var(--space-1);
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    height: var(--ctrl-h-md);
+    padding: 0 var(--space-2);
+    touch-action: none;
+    cursor: ew-resize;
+    background: var(--surface-ctrl);
+    border-radius: var(--radius-base);
+    transition: background-color var(--tr-fast);
+  }
+
+  .dim-scrubber:hover {
+    background: var(--surface-ctrl-hover);
+  }
+
+  .dim-scrubber__axis {
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    color: var(--ink-faint);
+    pointer-events: none;
+  }
+
+  .dim-scrubber__val {
+    font-weight: var(--fw-medium);
+    color: var(--ink-primary);
+    pointer-events: none;
+  }
+
+  .dim-scrubber__input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    font-size: var(--fs-sm);
+    color: var(--ink-primary);
+    text-align: center;
+    outline: none;
+    background: var(--surface-card);
+    border-radius: var(--radius-base);
+  }
+}

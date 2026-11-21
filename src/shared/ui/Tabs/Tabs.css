@@ -1,0 +1,94 @@
+@layer components {
+  /* --- Chrome-Style Seamless Folder Tabs (Radius synced 1:1 with .ui-panel) --- */
+  .ui-tabs {
+    --tab-active-bg: var(--surface-card);
+    --tab-r: calc(var(--radius-base) + var(--panel-body-pad));
+
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    height: 3.25rem;
+  }
+
+  .ui-tabs--fill {
+    width: 100%;
+  }
+
+  .ui-tabs--fill .ui-tabs__btn {
+    flex: 1 1 0;
+  }
+
+  .ui-tabs--inline .ui-tabs__btn {
+    padding: 0 var(--space-5);
+  }
+
+  .ui-tabs__btn {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--space-4);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-regular);
+    color: var(--ink-secondary);
+    white-space: nowrap;
+    background: transparent;
+    transition:
+      color var(--tr-fast),
+      background-color var(--tr-fast);
+  }
+
+  .ui-tabs__btn:hover {
+    color: var(--ink-primary);
+  }
+
+  .ui-tabs__btn.is-active {
+    z-index: 2;
+    font-weight: var(--fw-medium);
+    color: var(--ink-primary);
+    background: var(--tab-active-bg);
+  }
+
+  .ui-tabs__btn.is-active:not(:first-child) {
+    border-top-left-radius: var(--tab-r);
+  }
+
+  .ui-tabs__btn.is-active:not(:last-child),
+  .ui-tabs--inline .ui-tabs__btn.is-active {
+    border-top-right-radius: var(--tab-r);
+  }
+
+  /* Concave inverted fillets matching panel corner radius */
+  .ui-tabs__btn.is-active:not(:first-child)::before {
+    position: absolute;
+    bottom: 0;
+    left: calc(var(--tab-r) * -1);
+    width: var(--tab-r);
+    height: var(--tab-r);
+    pointer-events: none;
+    content: "";
+    background: radial-gradient(
+      circle at 0 0,
+      transparent calc(var(--tab-r) - 0.5px),
+      var(--tab-active-bg) var(--tab-r)
+    );
+  }
+
+  .ui-tabs__btn.is-active:not(:last-child)::after,
+  .ui-tabs--inline .ui-tabs__btn.is-active::after {
+    position: absolute;
+    right: calc(var(--tab-r) * -1);
+    bottom: 0;
+    width: var(--tab-r);
+    height: var(--tab-r);
+    pointer-events: none;
+    content: "";
+    background: radial-gradient(
+      circle at 100% 0,
+      transparent calc(var(--tab-r) - 0.5px),
+      var(--tab-active-bg) var(--tab-r)
+    );
+  }
+}

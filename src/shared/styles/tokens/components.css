@@ -1,0 +1,26 @@
+@layer tokens {
+  :root {
+    /* Level 3: Component Geometry Tokens (Borderless concentric 4px / 0.25rem grid) */
+    --divider-w: 1px;
+    --shell-padding: var(--space-3);
+    --shell-gap: var(--space-3);
+    --panel-body-pad: var(--space-2);
+    --segmented-pad: var(--space-1);
+    --hud-pad: var(--space-1);
+    --matrix-card-pad: var(--space-4);
+    --sidebar-left-w: 20rem;
+    --sidebar-left-w-compact: 18rem;
+    --sidebar-right-w: 21rem;
+    --sidebar-right-w-compact: 19rem;
+    --ctrl-h-xs: 1.5rem;
+    --ctrl-h-sm: 1.75rem;
+    --ctrl-h-md: 2rem;
+    --ctrl-h-lg: 2.25rem;
+    --hud-offset: var(--space-4);
+    --view-switch-w: 5.5rem;
+    --prop-ctrl-w: 11.5rem;
+    --scrubber-btn-size: 1.5rem;
+    --compare-col-gap: var(--space-5);
+    --compare-row-gap: var(--space-4);
+  }
+}

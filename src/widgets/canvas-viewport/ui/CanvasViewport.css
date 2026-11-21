@@ -1,0 +1,139 @@
+@layer widgets {
+  .viewport-area {
+    position: relative;
+    flex: 1 1 0;
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--surface-canvas);
+  }
+
+  .pan-zoom-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    touch-action: none;
+    cursor: grab;
+  }
+
+  .pan-zoom-container.is-grabbing {
+    cursor: grabbing;
+  }
+
+  .canvas-transform-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+  }
+
+  .artboard-stage {
+    background-color: var(--surface-artboard);
+    border-radius: 0;
+    box-shadow: var(--shadow-artboard);
+    transition:
+      box-shadow var(--tr-base),
+      background-color var(--tr-base);
+  }
+
+  .artboard-stage.surface-mode,
+  .artboard-stage.is-multi-compare {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .stage-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stage-container--gallery {
+    display: grid;
+    gap: var(--compare-row-gap) var(--compare-col-gap);
+    align-items: start;
+    justify-content: center;
+    padding: var(--space-4);
+  }
+
+  .stage-gallery-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .stage-gallery-item__label {
+    max-width: 6rem;
+    font-size: var(--fs-xs);
+    color: var(--ink-faint);
+  }
+
+  .artboard-cell {
+    position: relative;
+  }
+
+  .artboard-cell.with-board {
+    background-color: var(--surface-artboard);
+    box-shadow: var(--shadow-artboard);
+  }
+
+  .artboard-cell.surface-mode {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .master-svg {
+    display: block;
+    overflow: visible;
+  }
+
+  #layerGrid,
+  #layerKeylines,
+  #layerIllustrationGuides,
+  .layer-grid,
+  .layer-keylines,
+  .layer-illustration {
+    transition: opacity var(--tr-base);
+  }
+
+  .inspection-mode #layerGrid,
+  .inspection-mode #layerKeylines,
+  .inspection-mode #layerIllustrationGuides,
+  .inspection-mode .layer-grid,
+  .inspection-mode .layer-keylines,
+  .inspection-mode .layer-illustration {
+    opacity: 0.3;
+  }
+
+  /* Floating HUD Positions */
+  .viewport-hud-left {
+    position: absolute;
+    bottom: var(--hud-offset);
+    left: var(--hud-offset);
+    z-index: var(--z-hud);
+  }
+
+  .viewport-hud-right {
+    position: absolute;
+    right: var(--hud-offset);
+    bottom: var(--hud-offset);
+    z-index: var(--z-hud);
+    gap: var(--space-2);
+  }
+
+  .viewport-zoom-label {
+    min-width: 3.75rem;
+    padding: 0 var(--space-2) 0 var(--space-3);
+    font-size: var(--fs-sm);
+    color: var(--ink-secondary);
+    text-align: right;
+    white-space: nowrap;
+    user-select: none;
+  }
+}

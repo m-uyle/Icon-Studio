@@ -1,0 +1,27 @@
+@layer pages {
+  #app {
+    width: 100%;
+    height: 100%;
+  }
+
+  .studio-shell {
+    display: flex;
+    gap: var(--shell-gap);
+    width: 100%;
+    height: 100%;
+    padding: var(--space-2);
+    overflow: hidden;
+  }
+
+  @media (width >= 40rem) {
+    .studio-shell {
+      padding: var(--shell-padding);
+    }
+  }
+
+  .studio-main {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}

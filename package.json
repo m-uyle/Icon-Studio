@@ -1,0 +1,15 @@
+{
+  "name": "icon-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Parametric grid tooling and production QA for SVG icons.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}

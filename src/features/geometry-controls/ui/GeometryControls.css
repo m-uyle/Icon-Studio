@@ -1,0 +1,143 @@
+@layer components {
+  .geometry-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .geometry-section__header {
+    display: flex;
+    gap: var(--space-2);
+    align-items: baseline;
+  }
+
+  .geometry-section__title {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    color: var(--ink-primary);
+  }
+
+  .geometry-property-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: 100%;
+  }
+
+  .geometry-property-item {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--ctrl-h-md);
+  }
+
+  .geometry-property-label {
+    min-width: 0;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-regular);
+    color: var(--ink-secondary);
+    white-space: nowrap;
+  }
+
+  .geometry-property-ctrl {
+    display: flex;
+    flex: 0 0 var(--prop-ctrl-w);
+    align-items: center;
+    width: var(--prop-ctrl-w);
+    min-width: 0;
+  }
+
+  .geometry-dim-inline {
+    display: flex;
+    gap: var(--space-1);
+    align-items: center;
+    width: 100%;
+    font-size: var(--fs-sm);
+  }
+
+  .geometry-aspect-btn {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: var(--ctrl-h-sm);
+    height: var(--ctrl-h-md);
+    color: var(--ink-secondary);
+    border-radius: var(--radius-base);
+    transition:
+      background-color var(--tr-fast),
+      color var(--tr-fast),
+      opacity var(--tr-fast);
+  }
+
+  .geometry-aspect-btn:hover {
+    color: var(--ink-primary);
+    background: var(--surface-ctrl-hover);
+  }
+
+  .geometry-aspect-btn:active {
+    background: var(--surface-ctrl-pressed);
+    transform: scale(0.94);
+  }
+
+  .geometry-aspect-btn.is-unlinked {
+    opacity: 0.45;
+  }
+
+  .geometry-aspect-icon {
+    width: var(--space-3);
+    height: var(--space-3);
+  }
+
+  .geometry-segment-inline {
+    display: flex;
+    gap: var(--space-1);
+    align-items: center;
+    width: 100%;
+    height: var(--ctrl-h-md);
+    padding: var(--segmented-pad);
+    background: var(--surface-ctrl);
+    border-radius: var(--radius-base);
+  }
+
+  .btn-quick-size,
+  .btn-quick-ratio {
+    display: inline-flex;
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    height: 100%;
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-regular);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-secondary);
+    background: transparent;
+    border-radius: max(0px, calc(var(--radius-base) - var(--segmented-pad)));
+    transition:
+      background-color var(--tr-fast),
+      color var(--tr-fast),
+      transform var(--tr-fast);
+  }
+
+  .btn-quick-size:not(.geometry-active):hover,
+  .btn-quick-ratio:not(.geometry-active):hover {
+    color: var(--ink-primary);
+    background: var(--surface-ctrl-hover);
+  }
+
+  .btn-quick-size:not(.geometry-active):active,
+  .btn-quick-ratio:not(.geometry-active):active {
+    color: var(--ink-primary);
+    background: var(--surface-ctrl-pressed);
+    transform: scale(0.96);
+  }
+
+  .btn-quick-size.geometry-active,
+  .btn-quick-ratio.geometry-active {
+    font-weight: var(--fw-medium);
+    color: var(--ink-on-selected);
+    background: var(--surface-ctrl-selected);
+  }
+}

@@ -1,0 +1,19 @@
+@layer components {
+  /* --- Panel & Card Shells --- */
+  .ui-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background: var(--surface-card);
+    border-radius: calc(var(--radius-base) + var(--panel-body-pad));
+    box-shadow: var(--shadow-surface);
+  }
+
+  .ui-divider {
+    flex-shrink: 0;
+    width: 100%;
+    height: var(--divider-w);
+    background: var(--border-divider);
+  }
+}

@@ -1,0 +1,67 @@
+@layer widgets {
+  .inspector-sidebar {
+    flex-shrink: 0;
+    width: var(--sidebar-right-w-compact);
+  }
+
+  @media (width >= 40rem) {
+    .inspector-sidebar {
+      width: var(--sidebar-right-w);
+    }
+  }
+
+  .inspector-sidebar__tabs-bar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: stretch;
+    padding: 0;
+    background: var(--surface-canvas);
+  }
+
+  .inspector-sidebar__pane {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    padding: 0;
+    overflow-y: auto;
+  }
+
+  .inspector-sidebar__pane > section {
+    padding: var(--space-4);
+  }
+
+  .inspector-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .inspector-section__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .inspector-section__title-row {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .inspector-section__title {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    color: var(--ink-primary);
+  }
+
+  .inspector-section__badge {
+    flex-shrink: 0;
+    font-size: var(--fs-xs);
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .inspector-sidebar.is-matrix-mode .qa-canvas-only {
+    display: none;
+  }
+}

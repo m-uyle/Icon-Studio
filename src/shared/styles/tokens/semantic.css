@@ -1,0 +1,148 @@
+@layer tokens {
+  :root,
+  [data-theme="light"] {
+    /* Level 2: Semantic Surfaces (Cool-neutral OKLCH tonal ladder, H = 255) */
+    --surface-app: var(--p-light-926);
+    --surface-card: var(--p-light-986);
+    --surface-canvas: var(--p-light-952);
+    --surface-artboard: var(--p-light-996);
+    --surface-ctrl: var(--p-light-926);
+    --surface-ctrl-hover: var(--p-light-888);
+    --surface-ctrl-pressed: var(--p-light-855);
+
+    /* Calm tonal selected state for segments/toggles (eliminates harsh black spots) */
+    --surface-ctrl-selected: oklch(96.5% 0.004 255deg);
+    --surface-ctrl-active: var(--p-light-195);
+    --surface-hud: oklch(98.6% 0.003 255deg / 94%);
+    --surface-solid-btn: var(--p-light-195);
+    --surface-solid-btn-hover: oklch(28% 0.012 255deg);
+    --surface-solid-btn-pressed: oklch(14% 0.008 255deg);
+
+    /* Level 2: Semantic Ink */
+    --ink-primary: var(--p-light-195);
+    --ink-secondary: var(--p-light-430);
+    --ink-faint: var(--p-light-550);
+    --ink-on-selected: var(--p-light-195);
+    --ink-on-active: var(--p-light-986);
+    --ink-on-solid: var(--p-light-986);
+
+    /* Level 2: Semantic Dividers & Tracks */
+    --border-divider: var(--p-light-888);
+    --border-focus: var(--p-light-195);
+    --scrollbar-thumb: var(--p-light-770);
+    --scrollbar-thumb-hover: var(--p-light-550);
+
+    /* Level 2: Minified Elevation Shadows (3 semantic tiers — elevated surfaces only) */
+    --shadow-surface:
+      0 0.75rem 2rem -0.5rem oklch(20% 0.012 255deg / 8%),
+      0 0.125rem 0.5rem -0.125rem oklch(20% 0.012 255deg / 4%);
+    --shadow-artboard:
+      0 1.25rem 2.75rem -0.625rem oklch(20% 0.012 255deg / 13%),
+      0 0.25rem 0.75rem -0.125rem oklch(20% 0.012 255deg / 6%);
+    --shadow-floating:
+      0 0.75rem 1.75rem -0.375rem oklch(20% 0.012 255deg / 15%),
+      0 0.1875rem 0.5rem -0.125rem oklch(20% 0.012 255deg / 7%);
+
+    /* Level 2: Semantic Status & Accent */
+    --status-success: var(--p-emerald-light);
+    --status-success-dot: var(--p-emerald-light);
+    --status-warning: var(--p-amber-light);
+    --status-warning-dot: var(--p-amber-light);
+    --status-danger: var(--p-rose-light);
+    --status-danger-hover: oklch(45% 0.21 20deg);
+    --status-danger-bg: oklch(56% 0.21 15deg / 12%);
+
+    /* Level 2: Guide & QA Layer Colors */
+    --guide-safe-zone: var(--p-rose-light);
+    --guide-circle: var(--p-indigo-light);
+    --guide-square: var(--p-blue-light);
+    --guide-rect-h: var(--p-emerald-light);
+    --guide-rect-v: var(--p-emerald-alt-light);
+    --guide-harmonic: var(--p-amber-light);
+    --guide-concentric: var(--p-indigo-brand);
+    --guide-rays: var(--p-purple-light);
+    --guide-thirds: var(--p-orange-light);
+    --guide-axes: var(--p-cyan-light);
+    --guide-diagonals: var(--p-slate-light);
+    --guide-pixel: var(--p-light-855);
+    --guide-illustration: var(--p-fuchsia-light);
+    --qa-subpixel: var(--p-red-light);
+    --qa-optical-bounds: var(--p-purple-light);
+    --qa-optical-center: var(--p-cyan-light);
+    --qa-bleed: var(--p-rose-light);
+    --checker-tint: oklch(50% 0.008 255deg / 8%);
+  }
+
+  [data-theme="dark"] {
+    /* Level 2: Semantic Surfaces (Cool-neutral OKLCH dark ladder, H = 255) */
+    --surface-app: var(--p-dark-130);
+    --surface-card: var(--p-dark-176);
+    --surface-canvas: var(--p-dark-152);
+    --surface-artboard: var(--p-dark-208);
+    --surface-ctrl: var(--p-dark-228);
+    --surface-ctrl-hover: var(--p-dark-274);
+    --surface-ctrl-pressed: var(--p-dark-335);
+
+    /* Calm tonal selected state for segments/toggles in dark mode */
+    --surface-ctrl-selected: oklch(30.5% 0.011 255deg);
+    --surface-ctrl-active: var(--p-dark-948);
+    --surface-hud: oklch(17.6% 0.009 255deg / 94%);
+    --surface-solid-btn: var(--p-dark-948);
+    --surface-solid-btn-hover: oklch(88% 0.006 255deg);
+    --surface-solid-btn-pressed: oklch(81% 0.008 255deg);
+
+    /* Level 2: Semantic Ink (Dark) */
+    --ink-primary: var(--p-dark-948);
+    --ink-secondary: var(--p-dark-725);
+    --ink-faint: var(--p-dark-560);
+    --ink-on-selected: var(--p-dark-948);
+    --ink-on-active: var(--p-dark-130);
+    --ink-on-solid: var(--p-dark-130);
+
+    /* Level 2: Semantic Dividers & Tracks (Dark) */
+    --border-divider: var(--p-dark-274);
+    --border-focus: var(--p-dark-948);
+    --scrollbar-thumb: var(--p-dark-335);
+    --scrollbar-thumb-hover: var(--p-dark-560);
+
+    /* Level 2: Minified Elevation Shadows (Dark) */
+    --shadow-surface:
+      0 1rem 2.5rem -0.5rem oklch(0% 0 0deg / 55%),
+      0 0.25rem 0.75rem -0.125rem oklch(0% 0 0deg / 35%);
+    --shadow-artboard:
+      0 1.5rem 3.25rem -0.625rem oklch(0% 0 0deg / 75%),
+      0 0.375rem 1rem -0.25rem oklch(0% 0 0deg / 45%);
+    --shadow-floating:
+      0 0.875rem 2rem -0.375rem oklch(0% 0 0deg / 65%),
+      0 0.25rem 0.625rem -0.125rem oklch(0% 0 0deg / 40%);
+
+    /* Level 2: Semantic Status & Accent (Dark) */
+    --status-success: var(--p-emerald-dark);
+    --status-success-dot: var(--p-emerald-dark);
+    --status-warning: var(--p-amber-dark);
+    --status-warning-dot: var(--p-amber-dark);
+    --status-danger: var(--p-rose-dark);
+    --status-danger-hover: oklch(60% 0.2 20deg);
+    --status-danger-bg: oklch(72% 0.16 15deg / 16%);
+
+    /* Level 2: Guide & QA Layer Colors (Dark) */
+    --guide-safe-zone: var(--p-rose-dark);
+    --guide-circle: var(--p-indigo-dark);
+    --guide-square: var(--p-blue-dark);
+    --guide-rect-h: var(--p-emerald-dark);
+    --guide-rect-v: var(--p-emerald-alt-dark);
+    --guide-harmonic: var(--p-amber-dark);
+    --guide-concentric: var(--p-blue-dark);
+    --guide-rays: var(--p-purple-dark);
+    --guide-thirds: var(--p-orange-dark);
+    --guide-axes: var(--p-cyan-dark);
+    --guide-diagonals: var(--p-slate-dark);
+    --guide-pixel: var(--p-grid-dark);
+    --guide-illustration: var(--p-fuchsia-dark);
+    --qa-subpixel: var(--p-red-dark);
+    --qa-optical-bounds: var(--p-purple-dark);
+    --qa-optical-center: var(--p-cyan-dark);
+    --qa-bleed: var(--p-rose-dark);
+    --checker-tint: oklch(100% 0 0deg / 6%);
+  }
+}

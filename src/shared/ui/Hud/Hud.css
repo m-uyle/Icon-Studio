@@ -1,0 +1,130 @@
+@layer components {
+  /* --- Floating HUD Pill (Elevated over canvas, borderless) --- */
+  .floating-hud-pill {
+    display: flex;
+    gap: var(--space-1);
+    align-items: center;
+    padding: var(--hud-pad);
+    background: var(--surface-hud);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-floating);
+    backdrop-filter: blur(1rem);
+    transition: background-color var(--tr-base);
+  }
+
+  .inspect-btn {
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: var(--space-1);
+    align-items: center;
+    justify-content: center;
+    height: var(--ctrl-h-sm);
+    padding: 0 var(--space-3);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-regular);
+    line-height: 1;
+    color: var(--ink-secondary);
+    background: transparent;
+    border-radius: var(--radius-full);
+    transition:
+      background-color var(--tr-fast),
+      color var(--tr-fast),
+      transform var(--tr-fast);
+  }
+
+  .inspect-btn:hover:not(:disabled) {
+    color: var(--ink-primary);
+    background: var(--surface-canvas);
+  }
+
+  .inspect-btn:active:not(:disabled) {
+    color: var(--ink-primary);
+    background: var(--surface-ctrl-pressed);
+    transform: scale(0.97);
+  }
+
+  .inspect-btn.active {
+    font-weight: var(--fw-medium);
+    color: var(--ink-primary);
+    background: var(--surface-ctrl-hover);
+  }
+
+  .inspect-btn.active:hover:not(:disabled) {
+    background: var(--surface-ctrl-pressed);
+  }
+
+  .inspect-btn:disabled {
+    color: var(--ink-faint);
+    cursor: not-allowed;
+    opacity: 0.42;
+  }
+
+  /* --- Zoom View Switch (Fit / 1:1) --- */
+  .view-switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: var(--view-switch-w);
+    min-width: var(--view-switch-w);
+    height: var(--ctrl-h-sm);
+    padding: var(--segmented-pad);
+    overflow: hidden;
+    background: var(--surface-ctrl);
+    border-radius: var(--radius-full);
+    isolation: isolate;
+  }
+
+  .view-switch::before {
+    position: absolute;
+    top: var(--segmented-pad);
+    left: var(--segmented-pad);
+    z-index: -1;
+    width: calc(50% - var(--segmented-pad));
+    height: calc(100% - var(--segmented-pad) * 2);
+    content: "";
+    background: var(--surface-ctrl-selected);
+    border-radius: var(--radius-full);
+    transition:
+      transform var(--tr-base),
+      opacity var(--tr-fast);
+  }
+
+  .view-switch.mode-1to1::before {
+    opacity: 1;
+    transform: translateX(100%);
+  }
+
+  .view-switch.mode-fit::before {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .view-switch.mode-manual::before {
+    opacity: 0;
+  }
+
+  .view-switch-btn {
+    display: flex;
+    flex: 1 1 50%;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    min-width: 0;
+    height: 100%;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-regular);
+    line-height: 1;
+    color: var(--ink-secondary);
+    border-radius: var(--radius-full);
+    transition: color var(--tr-fast);
+  }
+
+  .view-switch-btn:hover {
+    color: var(--ink-primary);
+  }
+
+  .view-switch-btn.is-active {
+    font-weight: var(--fw-medium);
+    color: var(--ink-on-selected);
+  }
+}

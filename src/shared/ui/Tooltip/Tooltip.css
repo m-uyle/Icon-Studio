@@ -1,0 +1,26 @@
+@layer components {
+  .ui-tooltip {
+    position: fixed;
+    z-index: var(--z-tooltip);
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    color: var(--ink-on-active);
+    white-space: nowrap;
+    pointer-events: none;
+    background: var(--surface-ctrl-active);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-floating);
+    opacity: 0;
+    transform: translateY(var(--space-1));
+    transition:
+      opacity var(--tr-fast),
+      transform var(--tr-fast);
+  }
+
+  .ui-tooltip.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

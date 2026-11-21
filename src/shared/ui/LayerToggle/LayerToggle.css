@@ -1,0 +1,154 @@
+@layer components {
+  /* --- Layer Toggles (Borderless tonal distinction, zero inset borders) --- */
+  .layer-toggle-grid,
+  .qa-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+    font-size: var(--fs-sm);
+  }
+
+  .layer-toggle {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    justify-content: space-between;
+    height: var(--ctrl-h-md);
+    padding: 0 var(--space-3);
+    border-radius: var(--radius-base);
+    transition:
+      background-color var(--tr-fast),
+      color var(--tr-fast),
+      opacity var(--tr-fast),
+      transform var(--tr-fast);
+  }
+
+  .layer-toggle__lead {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    min-width: 0;
+  }
+
+  .layer-toggle.active {
+    color: var(--ink-primary);
+    background-color: var(--surface-ctrl-hover);
+  }
+
+  .layer-toggle.active:hover:not(:disabled) {
+    background-color: var(--surface-ctrl-pressed);
+  }
+
+  .layer-toggle:not(.active) {
+    color: var(--ink-secondary);
+    background-color: var(--surface-canvas);
+    opacity: 0.82;
+  }
+
+  .layer-toggle:not(.active):hover:not(:disabled) {
+    color: var(--ink-primary);
+    background-color: var(--surface-ctrl);
+    opacity: 1;
+  }
+
+  .layer-toggle:active:not(:disabled) {
+    background-color: var(--surface-ctrl-pressed);
+    transform: scale(0.985);
+  }
+
+  .layer-toggle:disabled {
+    cursor: not-allowed;
+    opacity: 0.42;
+  }
+
+  .layer-toggle--span-2 {
+    grid-column: span 2;
+  }
+
+  .layer-toggle .check-icon {
+    flex-shrink: 0;
+    width: var(--space-3);
+    height: var(--space-3);
+    stroke: currentcolor;
+    transition:
+      opacity var(--tr-fast),
+      transform var(--tr-fast);
+  }
+
+  .layer-toggle:not(.active) .check-icon {
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  .layer-toggle.active .check-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .layer-toggle.active .truncate {
+    font-weight: var(--fw-medium);
+  }
+
+  .layer-toggle:not(.active) .truncate {
+    font-weight: var(--fw-regular);
+  }
+
+  .guide-icon {
+    flex: 0 0 1rem;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    opacity: 0.9;
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* --- Compare Checkbox --- */
+  .chk-compare-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    appearance: none;
+    cursor: pointer;
+    background-color: var(--surface-ctrl-hover);
+    border-radius: max(0px, calc(var(--radius-base) - var(--segmented-pad)));
+    transition:
+      background-color var(--tr-fast),
+      transform var(--tr-fast);
+  }
+
+  .chk-compare-icon:not(:checked):hover {
+    background-color: var(--surface-ctrl-pressed);
+  }
+
+  .chk-compare-icon:active {
+    transform: scale(0.92);
+  }
+
+  .chk-compare-icon:checked {
+    background-color: var(--surface-ctrl-active);
+  }
+
+  .chk-compare-icon:checked:hover {
+    background-color: var(--surface-solid-btn-hover);
+  }
+
+  .chk-compare-icon:checked::after {
+    display: block;
+    width: var(--space-2);
+    height: var(--space-2);
+    content: "";
+    background-color: var(--ink-on-active);
+    mask:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E")
+      no-repeat center / contain;
+  }
+}

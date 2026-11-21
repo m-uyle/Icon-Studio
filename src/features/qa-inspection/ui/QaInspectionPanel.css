@@ -1,0 +1,130 @@
+@layer components {
+  .qa-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .qa-section__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .qa-section__title {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    color: var(--ink-primary);
+  }
+
+  .qa-status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--space-5);
+    padding: 0 var(--space-2);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    background: var(--surface-canvas);
+    border-radius: var(--radius-full);
+  }
+
+  /* Empty state when no icon is loaded */
+  .qa-empty-state {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    align-items: center;
+    padding: var(--space-5) var(--space-4);
+    text-align: center;
+    background: var(--surface-canvas);
+    border-radius: var(--radius-base);
+  }
+
+  .qa-empty-state__icon {
+    width: var(--space-5);
+    height: var(--space-5);
+    margin-bottom: var(--space-1);
+    color: var(--ink-faint);
+  }
+
+  .qa-empty-state__title {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--ink-secondary);
+  }
+
+  .qa-empty-state__sub {
+    font-size: var(--fs-xs);
+    line-height: 1.4;
+    color: var(--ink-faint);
+  }
+
+  .qa-health-strip {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .qa-metric-tile {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+    padding: var(--space-2) var(--space-3);
+    background: var(--surface-canvas);
+    border-radius: var(--radius-base);
+  }
+
+  .qa-metric-tile__label {
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-regular);
+    color: var(--ink-faint);
+  }
+
+  .qa-metric-tile__value {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--ink-primary);
+  }
+
+  /* Flat label-left | value-right geometry specs (matches Canvas & Geometry) */
+  .qa-specs-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: var(--fs-sm);
+  }
+
+  .qa-specs-row {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .qa-specs-row__key {
+    flex-shrink: 0;
+    font-weight: var(--fw-regular);
+    color: var(--ink-secondary);
+  }
+
+  .qa-specs-row__val {
+    max-width: 11rem;
+    font-weight: var(--fw-medium);
+    color: var(--ink-primary);
+    text-align: right;
+  }
+
+  .qa-tab-dot {
+    flex-shrink: 0;
+    width: var(--space-2);
+    height: var(--space-2);
+    background: var(--status-success-dot);
+    border-radius: var(--radius-full);
+  }
+
+  .qa-tab-dot--warning {
+    background: var(--status-warning-dot);
+  }
+}

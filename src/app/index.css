@@ -1,0 +1,27 @@
+@layer reset, tokens, components, widgets, pages, utilities;
+
+/* Level 1–3 Design Tokens */
+@import "../shared/styles/tokens/primitives.css";
+@import "../shared/styles/tokens/semantic.css";
+@import "../shared/styles/tokens/components.css";
+
+/* Base & Shared UI */
+@import "../shared/styles/reset.css";
+@import "../shared/ui/ui.css";
+
+/* Features */
+@import "../features/geometry-controls/ui/GeometryControls.css";
+@import "../features/qa-inspection/ui/QaInspectionPanel.css";
+
+/* Widgets */
+@import "../widgets/assets-sidebar/ui/AssetsSidebar.css";
+@import "../widgets/workspace-header/ui/WorkspaceHeader.css";
+@import "../widgets/canvas-viewport/ui/CanvasViewport.css";
+@import "../widgets/matrix-dashboard/ui/MatrixDashboard.css";
+@import "../widgets/inspector-sidebar/ui/InspectorSidebar.css";
+
+/* Pages */
+@import "../pages/studio/ui/StudioPage.css";
+
+/* Utilities */
+@import "../shared/styles/utilities.css";

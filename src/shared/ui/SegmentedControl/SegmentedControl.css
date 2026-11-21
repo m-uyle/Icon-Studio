@@ -1,0 +1,91 @@
+@layer components {
+  /* --- Segmented Controls & Tab Pills (Zero shadows, borderless tonal) --- */
+  .ui-segmented {
+    display: inline-flex;
+    gap: var(--space-1);
+    align-items: center;
+    padding: var(--segmented-pad);
+    font-size: var(--fs-sm);
+    background: var(--surface-ctrl);
+    border-radius: var(--radius-base);
+  }
+
+  .ui-segmented--pill {
+    border-radius: var(--radius-full);
+  }
+
+  .ui-segmented--grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-1);
+    width: 100%;
+    font-size: var(--fs-sm);
+  }
+
+  .ui-segmented--compact {
+    font-size: var(--fs-xs);
+  }
+
+  .ui-segmented--hud {
+    height: var(--ctrl-h-sm);
+    font-size: var(--fs-sm);
+  }
+
+  .ui-segmented--hud .ui-segmented__btn {
+    height: 100%;
+    padding: 0 var(--space-3);
+  }
+
+  .ui-segmented__btn {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    justify-content: center;
+    height: var(--ctrl-h-sm);
+    padding: 0 var(--space-3);
+    font-weight: var(--fw-regular);
+    color: var(--ink-secondary);
+    border-radius: max(0px, calc(var(--radius-base) - var(--segmented-pad)));
+    transition:
+      background-color var(--tr-fast),
+      color var(--tr-fast),
+      transform var(--tr-fast);
+  }
+
+  .ui-segmented--pill .ui-segmented__btn {
+    border-radius: var(--radius-full);
+  }
+
+  .ui-segmented__btn:not(.is-active):hover:not(:disabled) {
+    color: var(--ink-primary);
+    background: var(--surface-ctrl-hover);
+  }
+
+  .ui-segmented__btn:not(.is-active):active:not(:disabled) {
+    color: var(--ink-primary);
+    background: var(--surface-ctrl-pressed);
+    transform: scale(0.98);
+  }
+
+  .ui-segmented__btn:disabled {
+    color: var(--ink-faint);
+    cursor: not-allowed;
+    opacity: 0.42;
+  }
+
+  .ui-segmented__btn.is-active {
+    font-weight: var(--fw-medium);
+    color: var(--ink-on-selected);
+    background: var(--surface-ctrl-selected);
+  }
+
+  .ui-segmented__btn--xs {
+    height: var(--ctrl-h-xs);
+    padding: 0 var(--space-2);
+  }
+
+  .ui-segmented__btn--22 {
+    height: var(--ctrl-h-xs);
+    padding: 0 var(--space-2);
+  }
+}

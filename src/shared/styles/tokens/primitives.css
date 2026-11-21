@@ -1,0 +1,101 @@
+@layer tokens {
+  :root {
+    /* ========================================================================
+       Level 1: Cool-Leaning Neutral OKLCH Color Primitives (H = 255)
+       Subtle crisp coolness (C = 0.003–0.010) with perceptually even ΔL steps
+       for clear borderless tonal hierarchy.
+       ======================================================================== */
+
+    /* Cool Neutral Ramp — Light Surfaces & Dark Ink (H = 255) */
+    --p-light-996: oklch(99.6% 0.002 255deg);
+    --p-light-986: oklch(98.6% 0.003 255deg);
+    --p-light-952: oklch(95.2% 0.005 255deg);
+    --p-light-926: oklch(92.6% 0.006 255deg);
+    --p-light-888: oklch(88.8% 0.008 255deg);
+    --p-light-855: oklch(85.5% 0.008 255deg);
+    --p-light-770: oklch(77% 0.009 255deg);
+    --p-light-550: oklch(55% 0.01 255deg);
+    --p-light-430: oklch(43% 0.01 255deg);
+    --p-light-195: oklch(19.5% 0.01 255deg);
+
+    /* Cool Neutral Ramp — Dark Surfaces & Light Ink (H = 255) */
+    --p-dark-130: oklch(13% 0.007 255deg);
+    --p-dark-152: oklch(15.2% 0.008 255deg);
+    --p-dark-176: oklch(17.6% 0.009 255deg);
+    --p-dark-208: oklch(20.8% 0.01 255deg);
+    --p-dark-228: oklch(22.8% 0.01 255deg);
+    --p-dark-274: oklch(27.4% 0.012 255deg);
+    --p-dark-335: oklch(33.5% 0.012 255deg);
+    --p-dark-560: oklch(56% 0.01 255deg);
+    --p-dark-725: oklch(72.5% 0.009 255deg);
+    --p-dark-948: var(--p-light-952);
+
+    /* Perceptual Chromatic Ramp (Light = L 0.54–0.60, Dark = L 0.72–0.78) */
+    --p-indigo-light: oklch(54% 0.21 266deg);
+    --p-indigo-dark: oklch(73% 0.15 266deg);
+    --p-indigo-brand: oklch(52% 0.23 266deg);
+    --p-blue-light: oklch(55% 0.19 255deg);
+    --p-blue-dark: oklch(74% 0.14 255deg);
+    --p-emerald-light: oklch(55% 0.14 162deg);
+    --p-emerald-dark: oklch(75% 0.13 162deg);
+    --p-emerald-alt-light: oklch(61% 0.14 164deg);
+    --p-emerald-alt-dark: oklch(81% 0.11 164deg);
+    --p-amber-light: oklch(61% 0.15 72deg);
+    --p-amber-dark: oklch(80% 0.14 80deg);
+    --p-orange-light: oklch(59% 0.17 46deg);
+    --p-orange-dark: oklch(76% 0.14 50deg);
+    --p-rose-light: oklch(56% 0.21 15deg);
+    --p-rose-dark: oklch(72% 0.16 15deg);
+    --p-red-light: var(--p-rose-light);
+    --p-red-dark: var(--p-rose-dark);
+    --p-purple-light: oklch(54% 0.2 302deg);
+    --p-purple-dark: oklch(74% 0.15 302deg);
+    --p-fuchsia-light: oklch(60% 0.22 328deg);
+    --p-fuchsia-dark: oklch(75% 0.17 338deg);
+    --p-cyan-light: oklch(57% 0.13 215deg);
+    --p-cyan-dark: oklch(78% 0.12 208deg);
+    --p-slate-light: oklch(52% 0.03 255deg);
+    --p-slate-dark: oklch(70% 0.03 255deg);
+    --p-grid-dark: oklch(30% 0.01 255deg);
+
+    /* Strict 4px-grid Relative Spacing Scale (0.25rem increments) */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+
+    /* Single Concentric Radius Primitive + Modern Full-Pill Token */
+    --radius-base: 0.5rem;
+    --radius-full: calc(1px * infinity);
+
+    /* Unified Single Font Family: Inter */
+    --font-sans:
+      "Inter", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
+
+    /* Harmonic Major Third (×1.25) Typographic Scale (4 unified tiers) */
+    --fs-xs: 0.625rem;
+    --fs-sm: 0.75rem;
+    --fs-md: 0.9375rem;
+    --fs-lg: 1.1875rem;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+
+    /* Unified & Minified Transitions (2 tokens only) */
+    --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+    --tr-fast: 120ms var(--ease-standard);
+    --tr-base: 180ms var(--ease-standard);
+
+    /* Z-Index Scale */
+    --z-base: 1;
+    --z-control: 2;
+    --z-input: 5;
+    --z-header: 20;
+    --z-hud: 30;
+    --z-dropdown: 40;
+    --z-toast: 50;
+    --z-tooltip: 60;
+  }
+}

@@ -1,0 +1,29 @@
+@layer components {
+  /* --- Toast Notification (Elevated floating pill) --- */
+  .ui-toast {
+    position: fixed;
+    right: var(--space-5);
+    bottom: var(--space-5);
+    z-index: var(--z-toast);
+    display: flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--ink-on-active);
+    pointer-events: none;
+    background: var(--surface-ctrl-active);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-floating);
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition:
+      transform var(--tr-base),
+      opacity var(--tr-base);
+  }
+
+  .ui-toast.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
