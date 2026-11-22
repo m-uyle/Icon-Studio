@@ -5,8 +5,21 @@ import { syncTabs } from "../../../shared/ui/index.js";
  */
 export function initWorkspaceHeader(
   rootEl,
-  { getState, onWorkspaceViewChange, onThemeChange, onResetAll }
+  {
+    getState,
+    onWorkspaceViewChange,
+    onThemeChange,
+    onResetAll,
+    onOpenHelp,
+  } = {}
 ) {
+  if (!rootEl) {
+    return {
+      sync: () => {},
+      destroy: () => {},
+    };
+  }
+
   const ac = new AbortController();
   const { signal } = ac;
 
@@ -15,27 +28,30 @@ export function initWorkspaceHeader(
     { el: rootEl.querySelector("#viewTabMatrix"), value: "matrix" },
   ];
 
+  const btnHelp = rootEl.querySelector("#btnHelp");
   const btnResetAll = rootEl.querySelector("#btnResetAll");
   const btnThemeToggle = rootEl.querySelector("#btnThemeToggle");
   const iconThemeMoon = rootEl.querySelector("#iconThemeMoon");
   const iconThemeSun = rootEl.querySelector("#iconThemeSun");
 
-  viewButtons.forEach(({ el, value }) => {
-    el?.addEventListener("click", () => onWorkspaceViewChange(value), {
+  btnHelp?.addEventListener("click", () => onOpenHelp?.(), { signal });
+
+  for (const { el, value } of viewButtons) {
+    el?.addEventListener("click", () => onWorkspaceViewChange?.(value), {
       signal,
     });
-  });
+  }
 
   btnThemeToggle?.addEventListener(
     "click",
     () => {
-      const nextTheme = getState().theme === "dark" ? "light" : "dark";
-      onThemeChange(nextTheme);
+      const nextTheme = getState?.().theme === "dark" ? "light" : "dark";
+      onThemeChange?.(nextTheme);
     },
     { signal }
   );
 
-  btnResetAll?.addEventListener("click", () => onResetAll(), { signal });
+  btnResetAll?.addEventListener("click", () => onResetAll?.(), { signal });
 
   function sync() {
     const state = getState();

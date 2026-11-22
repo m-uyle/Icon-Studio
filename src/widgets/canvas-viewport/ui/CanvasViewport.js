@@ -22,13 +22,61 @@ import {
  * Interactive Artboard Viewport Widget: Single & Multi-Compare SVG rendering,
  * Pan/Zoom controller, and Floating HUD Pills (including working Grid Cols cycler).
  */
-export function initCanvasViewport(rootEl, { getState, showToast }) {
+export function initCanvasViewport(
+  rootEl,
+  { getState, showToast, inspectorEl } = {}
+) {
+  if (!rootEl) {
+    return {
+      render: () => {},
+      updateTransform: () => {},
+      refreshQaOverlaysOnly: () => {},
+      fitToScreen: () => {},
+      setZoom100: () => {},
+      syncZoomOnDimensionChange: () => {},
+      dismissPrompt: () => {},
+      resetPromptDismissed: () => {},
+      destroy: () => {},
+    };
+  }
+
   const ac = new AbortController();
   const { signal } = ac;
 
   const panZoomContainer = rootEl.querySelector("#panZoomContainer");
   const canvasTransformGroup = rootEl.querySelector("#canvasTransformGroup");
   const stageContainer = rootEl.querySelector("#stageContainer");
+  const viewportEmptyState = rootEl.querySelector("#viewportEmptyState");
+
+  let isPromptDismissed = false;
+
+  function dismissPrompt() {
+    if (!isPromptDismissed) {
+      isPromptDismissed = true;
+      viewportEmptyState?.classList.add("is-hidden");
+    }
+  }
+
+  // Dismiss empty prompt as soon as user begins interacting with the right sidebar
+  const rightSidebar =
+    inspectorEl || document.querySelector("#inspectorSidebar");
+  if (rightSidebar) {
+    const handleInspectorInteract = () => {
+      dismissPrompt();
+    };
+    rightSidebar.addEventListener("pointerdown", handleInspectorInteract, {
+      signal,
+      passive: true,
+    });
+    rightSidebar.addEventListener("keydown", handleInspectorInteract, {
+      signal,
+      passive: true,
+    });
+    rightSidebar.addEventListener("input", handleInspectorInteract, {
+      signal,
+      passive: true,
+    });
+  }
 
   const btnSurfaceMode = rootEl.querySelector("#btnSurfaceMode");
   const btnDiffMode = rootEl.querySelector("#btnDiffMode");
@@ -108,10 +156,10 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
     const scaledH = `${Math.round(state.height * (state.zoom / 100))}px`;
 
     if (isMultiCompare) {
-      stageContainer.querySelectorAll(".artboard-cell").forEach((cell) => {
+      for (const cell of stageContainer.querySelectorAll(".artboard-cell")) {
         cell.style.width = scaledW;
         cell.style.height = scaledH;
-      });
+      }
     } else {
       const curMasterSvg = stageContainer.querySelector("#masterSvg");
       if (curMasterSvg) {
@@ -128,11 +176,13 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
     const displayIcons = getSelectedIconsForDisplay(state);
     if (displayIcons.length >= 2) {
       const qaLayers = stageContainer.querySelectorAll(".layer-qa");
-      displayIcons.forEach(({ icon }, i) => {
+      let i = 0;
+      for (const { icon } of displayIcons) {
         if (qaLayers[i]) {
           qaLayers[i].innerHTML = buildQaOverlayMarkup(icon, state);
         }
-      });
+        i++;
+      }
     } else {
       const qaGroup = stageContainer.querySelector("#layerQaOverlay");
       const curIcon = state.batchQueue[state.batchIndex];
@@ -144,6 +194,12 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
 
   function render() {
     const state = getState();
+    const hasIcons = state.batchQueue.length > 0;
+    viewportEmptyState?.classList.toggle(
+      "is-hidden",
+      hasIcons || isPromptDismissed
+    );
+
     const W = state.width;
     const H = state.height;
     const P = state.padding;
@@ -174,7 +230,7 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
       const cols = getCompareGridCols(displayIcons.length, state.compareCols);
       let galleryHtml = "";
 
-      displayIcons.forEach(({ icon }) => {
+      for (const { icon } of displayIcons) {
         const processedSvg = getColoredArtworkMarkup(
           icon,
           state.artColorMode,
@@ -211,7 +267,7 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
             <span class="stage-gallery-item__label font-mono truncate">${escapeHtml(icon.name)}</span>
           </div>
         `;
-      });
+      }
 
       stageContainer.className = "stage-container stage-container--gallery";
       stageContainer.style.gridTemplateColumns = `repeat(${cols}, auto)`;
@@ -298,7 +354,7 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
     "click",
     () => {
       panZoom.fitToScreen(true);
-      showToast("Zoom: Fit");
+      showToast?.("Zoom: Fit");
     },
     { signal }
   );
@@ -307,7 +363,7 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
     "click",
     () => {
       panZoom.setZoom100(true);
-      showToast("Zoom: 1:1");
+      showToast?.("Zoom: 1:1");
     },
     { signal }
   );
@@ -318,7 +374,7 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
       const state = getState();
       state.surfaceMode = !state.surfaceMode;
       render();
-      showToast(
+      showToast?.(
         state.surfaceMode ? "Artboard Card: Hidden" : "Artboard Card: Visible"
       );
     },
@@ -335,7 +391,7 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
     { signal }
   );
 
-  colorModeButtons.forEach(({ el, value }) => {
+  for (const { el, value } of colorModeButtons) {
     el?.addEventListener(
       "click",
       () => {
@@ -344,7 +400,7 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
       },
       { signal }
     );
-  });
+  }
 
   function destroy() {
     ac.abort();
@@ -358,6 +414,11 @@ export function initCanvasViewport(rootEl, { getState, showToast }) {
     fitToScreen: panZoom.fitToScreen,
     setZoom100: panZoom.setZoom100,
     syncZoomOnDimensionChange: panZoom.syncZoomOnDimensionChange,
+    dismissPrompt,
+    resetPromptDismissed: () => {
+      isPromptDismissed = false;
+      render();
+    },
     destroy,
   };
 }

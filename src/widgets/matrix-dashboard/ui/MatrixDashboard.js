@@ -4,6 +4,12 @@ import {
 } from "../../../entities/icon/index.js";
 import { syncSegmentedButtons } from "../../../shared/ui/index.js";
 
+const MATRIX_STROKE_LIGHT = "#18181B";
+const MATRIX_STROKE_DARK = "#F4F4F5";
+const MATRIX_STROKE_MUTED_LIGHT = "#71717A";
+const MATRIX_STROKE_MUTED_DARK = "#A1A1AA";
+const MATRIX_STROKE_WHITE = "#FFFFFF";
+
 const SIZE_SLOTS = [
   { id: "sizeSlot16", size: 16 },
   { id: "sizeSlot20", size: 20 },
@@ -16,11 +22,25 @@ const SIZE_SLOTS = [
  * Embedded Matrix Workspace Widget: Interactive Scale & Raster Loupe (16–48px),
  * Silhouette Squint Test, Production Surfaces (including Disabled 38%), and 4 In-Situ UI Contexts.
  */
-export function initMatrixDashboard(rootEl, { getState }) {
+export function initMatrixDashboard(rootEl, { getState, onLoadSamples } = {}) {
+  if (!rootEl) {
+    return {
+      render: () => {},
+      setSizeScaleGround: () => {},
+      destroy: () => {},
+    };
+  }
+
   const ac = new AbortController();
   const { signal } = ac;
 
+  const matrixEmptyBanner = rootEl.querySelector("#matrixEmptyBanner");
+  const btnMatrixLoadSamples = rootEl.querySelector("#btnMatrixLoadSamples");
   const sizeScaleGround = rootEl.querySelector("#sizeScaleGround");
+
+  btnMatrixLoadSamples?.addEventListener("click", () => onLoadSamples?.(), {
+    signal,
+  });
   const scaleCells = Array.from(
     rootEl.querySelectorAll(".matrix-scale-cell[data-loupe-size]")
   );
@@ -71,14 +91,14 @@ export function initMatrixDashboard(rootEl, { getState }) {
   }
 
   function syncLoupeSelectionUI() {
-    scaleCells.forEach((cell) => {
+    for (const cell of scaleCells) {
       const sz = Number(cell.dataset.loupeSize);
       cell.classList.toggle("is-loupe-target", sz === loupeTargetPx);
       cell.setAttribute(
         "aria-pressed",
         sz === loupeTargetPx ? "true" : "false"
       );
-    });
+    }
     if (loupeTargetLabel) {
       loupeTargetLabel.textContent = `${loupeTargetPx}px`;
     }
@@ -90,25 +110,24 @@ export function initMatrixDashboard(rootEl, { getState }) {
     render();
   }
 
-  groundButtons.forEach(({ el, value }) => {
+  for (const { el, value } of groundButtons) {
     el?.addEventListener("click", () => setSizeScaleGround(value), { signal });
-  });
+  }
 
-  scaleCells.forEach((cell) => {
-    cell.addEventListener(
-      "click",
-      () => {
-        const nextSize = Number(cell.dataset.loupeSize);
-        if (!Number.isFinite(nextSize) || nextSize === loupeTargetPx) {
-          return;
-        }
-        loupeTargetPx = nextSize;
-        syncLoupeSelectionUI();
-        render();
-      },
-      { signal }
-    );
-  });
+  function handleScaleCellClick(e) {
+    const cell = e.currentTarget;
+    const nextSize = Number(cell?.dataset?.loupeSize);
+    if (!Number.isFinite(nextSize) || nextSize === loupeTargetPx) {
+      return;
+    }
+    loupeTargetPx = nextSize;
+    syncLoupeSelectionUI();
+    render();
+  }
+
+  for (const cell of scaleCells) {
+    cell.addEventListener("click", handleScaleCellClick, { signal });
+  }
 
   btnMatrixSquint?.addEventListener(
     "click",
@@ -234,6 +253,8 @@ export function initMatrixDashboard(rootEl, { getState }) {
 
     const state = getState();
     const curIcon = state.batchQueue[state.batchIndex];
+    matrixEmptyBanner?.classList.toggle("is-hidden", Boolean(curIcon));
+
     const W = state.width;
     const H = state.height;
     const P = state.padding;
@@ -261,38 +282,42 @@ export function initMatrixDashboard(rootEl, { getState }) {
       }
     }
 
-    const defaultStroke = isDarkTheme ? "#F4F4F5" : "#18181B";
-    const mutedStroke = isDarkTheme ? "#A1A1AA" : "#71717A";
+    const defaultStroke = isDarkTheme
+      ? MATRIX_STROKE_DARK
+      : MATRIX_STROKE_LIGHT;
+    const mutedStroke = isDarkTheme
+      ? MATRIX_STROKE_MUTED_DARK
+      : MATRIX_STROKE_MUTED_LIGHT;
 
     const scaleColor =
       sizeScaleGroundMode === "dark"
-        ? "#F4F4F5"
+        ? MATRIX_STROKE_DARK
         : sizeScaleGroundMode === "light"
-          ? "#18181B"
+          ? MATRIX_STROKE_LIGHT
           : defaultStroke;
 
     const scaleSvgInner = curIcon
       ? getColoredArtworkMarkup(curIcon, "contrast", scaleColor)
       : buildSampleCircle(W, H, scaleColor);
 
-    SIZE_SLOTS.forEach(({ id, size }) => {
+    for (const { id, size } of SIZE_SLOTS) {
       const el = rootEl.querySelector(`#${id}`);
       if (el) {
         el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${size}" height="${size}" preserveAspectRatio="xMidYMid meet" class="crisp-stroke matrix-svg-preview" stroke="${scaleColor}" fill="none"><g${tfAttr}>${scaleSvgInner}</g></svg>`;
       }
-    });
+    }
 
     renderLoupeCanvas(loupeTargetPx, W, H, scaleSvgInner, scaleColor, tfAttr);
 
     // 5 Production Surfaces (Light, Dark, Accent, Glass, Disabled 38%)
     const surfaceSlots = [
-      { id: "surfSlotWhite", strokeColor: "#18181B" },
-      { id: "surfSlotDark", strokeColor: "#F4F4F5" },
-      { id: "surfSlotBrand", strokeColor: "#FFFFFF" },
+      { id: "surfSlotWhite", strokeColor: MATRIX_STROKE_LIGHT },
+      { id: "surfSlotDark", strokeColor: MATRIX_STROKE_DARK },
+      { id: "surfSlotBrand", strokeColor: MATRIX_STROKE_WHITE },
       { id: "surfSlotGlass", strokeColor: defaultStroke },
       { id: "surfSlotDisabled", strokeColor: defaultStroke },
     ];
-    surfaceSlots.forEach(({ id, strokeColor }) => {
+    for (const { id, strokeColor } of surfaceSlots) {
       renderSlot(
         rootEl.querySelector(`#${id}`),
         24,
@@ -302,10 +327,12 @@ export function initMatrixDashboard(rootEl, { getState }) {
         strokeColor,
         tfAttr
       );
-    });
+    }
 
     // 4 Real UI Contexts
-    const solidBtnIconColor = isDarkTheme ? "#18181B" : "#FFFFFF";
+    const solidBtnIconColor = isDarkTheme
+      ? MATRIX_STROKE_LIGHT
+      : MATRIX_STROKE_WHITE;
     renderSlot(
       rootEl.querySelector("#inSituButtonIcon"),
       16,
@@ -390,6 +417,7 @@ export function initMatrixDashboard(rootEl, { getState }) {
   }
 
   function destroy() {
+    loupeSeqId++;
     ac.abort();
   }
 

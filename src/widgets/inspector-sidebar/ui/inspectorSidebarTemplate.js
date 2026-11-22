@@ -820,5 +820,14 @@ export const inspectorSidebarTemplate = `
             </div>
           </section>
         </div>
+
+        <footer class="inspector-sidebar__footer">
+          <a
+            class="inspector-sidebar__author"
+            href="https://github.com/m-uyle"
+            rel="noopener noreferrer"
+            target="_blank"
+          >by uyle</a>
+        </footer>
       </aside>
 `;

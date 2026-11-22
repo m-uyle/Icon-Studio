@@ -16,6 +16,30 @@
     margin: 0 auto;
   }
 
+  .matrix-empty-prompt {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    max-width: fit-content;
+    padding: var(--space-2) var(--space-3);
+    margin: 0 auto var(--space-4);
+    font-size: var(--fs-sm);
+    color: var(--ink-secondary);
+    background: var(--surface-hud);
+    border: var(--divider-w) solid var(--border-divider);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-surface);
+    backdrop-filter: blur(var(--space-3));
+  }
+
+  .matrix-empty-prompt.is-hidden {
+    display: none;
+  }
+
+  .matrix-empty-prompt__sep {
+    color: var(--ink-faint);
+  }
+
   .matrix-svg-preview {
     display: block;
     transition: filter var(--tr-base);

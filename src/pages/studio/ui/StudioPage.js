@@ -1,4 +1,6 @@
-import { OpticalAnalyzer } from "../../../entities/icon/index.js";
+import { OpticalAnalyzer, SAMPLE_ICONS } from "../../../entities/icon/index.js";
+import { initGlobalDropZone } from "../../../features/batch-import/index.js";
+import { initWelcomeModal } from "../../../features/onboarding/index.js";
 import {
   createToastController,
   initTooltipSystem,
@@ -29,8 +31,12 @@ import {
  */
 export function mountStudioPage(
   rootEl,
-  { getState, setState, subscribe, resetState }
+  { getState, setState, subscribe, resetState } = {}
 ) {
+  if (!rootEl) {
+    return { unmount: () => {} };
+  }
+
   const ac = new AbortController();
   const { signal } = ac;
 
@@ -111,11 +117,11 @@ export function mountStudioPage(
 
   function setTheme(newTheme) {
     const state = getState();
-    state.batchQueue.forEach((item) => {
+    for (const item of state.batchQueue) {
       item.cachedColorMarkups = {};
       item.subpixelReport = null;
       item.opticalMetrics = null;
-    });
+    }
     OpticalAnalyzer.clearCache();
     if (setState) {
       setState({ theme: newTheme });
@@ -131,17 +137,40 @@ export function mountStudioPage(
     resetState();
     OpticalAnalyzer.clearCache();
     canvasViewport.fitToScreen(true);
+    canvasViewport.resetPromptDismissed?.();
     setWorkspaceView("canvas");
     toast.show("Settings reset to 24 × 24 px");
   }
 
+  function handleLoadSampleIcons() {
+    let added = 0;
+    for (const sample of SAMPLE_ICONS) {
+      if (assetsSidebar.appendSvgString(sample.raw, sample.name, false)) {
+        added++;
+      }
+    }
+    if (added > 0) {
+      assetsSidebar.switchBatchIndex(0);
+      assetsSidebar.syncBatchUI();
+      renderActiveWorkspace();
+      toast.show(`Loaded ${added} demo icons`);
+    }
+  }
+
+  const welcomeModal = initWelcomeModal({
+    onLoadSamples: handleLoadSampleIcons,
+  });
+  welcomeModal.maybeAutoOpen();
+
   canvasViewport = initCanvasViewport(viewportArea, {
     getState,
     showToast: toast.show,
+    inspectorEl: rootEl.querySelector("#inspectorSidebar"),
   });
 
   matrixDashboard = initMatrixDashboard(matrixArea, {
     getState,
+    onLoadSamples: handleLoadSampleIcons,
   });
 
   workspaceHeader = initWorkspaceHeader(
@@ -151,6 +180,7 @@ export function mountStudioPage(
       onWorkspaceViewChange: setWorkspaceView,
       onThemeChange: setTheme,
       onResetAll: handleResetAll,
+      onOpenHelp: () => welcomeModal.open(),
     }
   );
 
@@ -209,6 +239,11 @@ export function mountStudioPage(
   window.addEventListener(
     "keydown",
     (e) => {
+      const isDialogOpen = Boolean(document.querySelector("dialog[open]"));
+      if (isDialogOpen) {
+        return;
+      }
+
       const state = getState();
       const target = e.target;
       const isInteractive =
@@ -263,6 +298,11 @@ export function mountStudioPage(
         assetsSidebar.removeIconFromBatch(state.batchIndex);
         toast.show("Icon deleted from queue");
       }
+
+      if (e.key === "?" && !isInteractive) {
+        e.preventDefault();
+        welcomeModal.open();
+      }
     },
     { signal }
   );
@@ -277,27 +317,32 @@ export function mountStudioPage(
     { signal }
   );
 
-  window.addEventListener(
-    "paste",
-    (e) => {
-      const active = document.activeElement;
-      const isInput =
-        ["INPUT", "TEXTAREA"].includes(active?.tagName) ||
-        Boolean(active?.isContentEditable);
-      if (isInput) {
-        return;
+  const globalDropZone = initGlobalDropZone({
+    container: rootEl,
+    onImportFiles: async (svgFiles) => {
+      const fileTexts = await Promise.all(
+        svgFiles.map(async (file) => ({
+          name: file.name,
+          text: await file.text(),
+        }))
+      );
+      let added = 0;
+      for (const item of fileTexts) {
+        if (assetsSidebar.appendSvgString(item.text, item.name, false)) {
+          added++;
+        }
       }
-      const text = (e.clipboardData || window.clipboardData)?.getData("text");
-      if (text?.includes("<svg") && text.includes("</svg>")) {
-        assetsSidebar.appendSvgString(
-          text,
-          `clipboard-${Date.now().toString().slice(-4)}.svg`,
-          true
-        );
+      if (added > 0) {
+        assetsSidebar.syncBatchUI();
+        renderActiveWorkspace();
+        toast.show(`Imported ${added} SVG${added > 1 ? "s" : ""}`);
       }
     },
-    { signal }
-  );
+    onImportSvgString: (svgMarkup, filename) => {
+      assetsSidebar.appendSvgString(svgMarkup, filename, true);
+    },
+    onNotify: (msg) => toast.show(msg),
+  });
 
   window.addEventListener(
     "resize",
@@ -368,6 +413,8 @@ export function mountStudioPage(
   function unmount() {
     unsubStore?.();
     ac.abort();
+    welcomeModal.destroy();
+    globalDropZone.destroy();
     workspaceHeader.destroy();
     canvasViewport.destroy();
     matrixDashboard.destroy();

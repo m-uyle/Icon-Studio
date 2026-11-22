@@ -122,4 +122,25 @@
     color: var(--ink-primary);
     background: var(--surface-ctrl-hover);
   }
+
+  /* Inline Link Button (e.g. prompt actions) */
+  .ui-link-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    font-family: inherit;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--ink-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: color var(--tr-fast);
+  }
+
+  .ui-link-btn:hover {
+    color: var(--ink-secondary);
+  }
 }

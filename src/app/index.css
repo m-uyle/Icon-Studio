@@ -12,6 +12,8 @@
 /* Features */
 @import "../features/geometry-controls/ui/GeometryControls.css";
 @import "../features/qa-inspection/ui/QaInspectionPanel.css";
+@import "../features/onboarding/ui/WelcomeModal.css";
+@import "../features/batch-import/ui/GlobalDropZone.css";
 
 /* Widgets */
 @import "../widgets/assets-sidebar/ui/AssetsSidebar.css";

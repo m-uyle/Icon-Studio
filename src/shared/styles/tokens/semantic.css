@@ -14,6 +14,7 @@
     --surface-ctrl-selected: oklch(96.5% 0.004 255deg);
     --surface-ctrl-active: var(--p-light-195);
     --surface-hud: oklch(98.6% 0.003 255deg / 94%);
+    --surface-backdrop: oklch(0% 0 0deg / 40%);
     --surface-solid-btn: var(--p-light-195);
     --surface-solid-btn-hover: oklch(28% 0.012 255deg);
     --surface-solid-btn-pressed: oklch(14% 0.008 255deg);
@@ -87,6 +88,7 @@
     --surface-ctrl-selected: oklch(30.5% 0.011 255deg);
     --surface-ctrl-active: var(--p-dark-948);
     --surface-hud: oklch(17.6% 0.009 255deg / 94%);
+    --surface-backdrop: oklch(0% 0 0deg / 60%);
     --surface-solid-btn: var(--p-dark-948);
     --surface-solid-btn-hover: oklch(88% 0.006 255deg);
     --surface-solid-btn-pressed: oklch(81% 0.008 255deg);

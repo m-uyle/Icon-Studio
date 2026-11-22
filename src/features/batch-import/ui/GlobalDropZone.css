@@ -1,0 +1,50 @@
+@layer components {
+  /* Fullscreen Drag-and-Drop Overlay */
+  .global-drop-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-toast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    background: var(--surface-backdrop);
+    backdrop-filter: blur(var(--space-1));
+  }
+
+  .global-drop-overlay.is-hidden {
+    display: none;
+  }
+
+  .global-drop-overlay__card {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    padding: var(--space-3) var(--space-5);
+    color: var(--ink-primary);
+    background: var(--surface-card);
+    border: var(--divider-w) solid var(--border-divider);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-floating);
+  }
+
+  .global-drop-overlay__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--ctrl-h-md);
+    height: var(--ctrl-h-md);
+    color: var(--ink-primary);
+  }
+
+  .global-drop-overlay__icon svg {
+    display: block;
+    shape-rendering: geometricprecision;
+  }
+
+  .global-drop-overlay__text {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    line-height: 1;
+  }
+}

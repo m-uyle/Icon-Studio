@@ -1,0 +1,94 @@
+@layer components {
+  /* --- Shared UI Checkbox Component --- */
+  .ui-checkbox {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .ui-checkbox.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.42;
+  }
+
+  .ui-checkbox__input,
+  .chk-compare-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    padding: 0;
+    margin: 0;
+    appearance: none;
+    cursor: pointer;
+    background-color: var(--surface-ctrl-hover);
+    border: none;
+    border-radius: max(0px, calc(var(--radius-base) - var(--segmented-pad)));
+    transition:
+      background-color var(--tr-fast),
+      transform var(--tr-fast);
+  }
+
+  .ui-checkbox__input:disabled,
+  .chk-compare-icon:disabled {
+    cursor: not-allowed;
+    opacity: 0.42;
+  }
+
+  .ui-checkbox:hover .ui-checkbox__input:not(:checked, :disabled),
+  .ui-checkbox__input:not(:checked, :disabled):hover,
+  .chk-compare-icon:not(:checked, :disabled):hover {
+    background-color: var(--surface-ctrl-pressed);
+  }
+
+  .ui-checkbox:active .ui-checkbox__input:not(:disabled),
+  .ui-checkbox__input:active:not(:disabled),
+  .chk-compare-icon:active:not(:disabled) {
+    transform: scale(0.92);
+  }
+
+  .ui-checkbox__input:checked,
+  .chk-compare-icon:checked {
+    background-color: var(--surface-ctrl-active);
+  }
+
+  .ui-checkbox:hover .ui-checkbox__input:checked:not(:disabled),
+  .ui-checkbox__input:checked:hover:not(:disabled),
+  .chk-compare-icon:checked:hover:not(:disabled) {
+    background-color: var(--surface-solid-btn-hover);
+  }
+
+  .ui-checkbox__input:checked::after,
+  .chk-compare-icon:checked::after {
+    display: block;
+    width: var(--space-2);
+    height: var(--space-2);
+    content: "";
+    background-color: var(--ink-on-active);
+    mask:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E")
+      no-repeat center / contain;
+  }
+
+  .ui-checkbox__input:focus-visible,
+  .chk-compare-icon:focus-visible {
+    outline: 0.125rem solid var(--border-focus);
+    outline-offset: 0.125rem;
+  }
+
+  .ui-checkbox__label {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-regular);
+    line-height: 1;
+    color: var(--ink-secondary);
+    transition: color var(--tr-fast);
+  }
+
+  .ui-checkbox:hover:not(.is-disabled) .ui-checkbox__label {
+    color: var(--ink-primary);
+  }
+}

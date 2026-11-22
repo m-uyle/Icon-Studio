@@ -590,11 +590,13 @@ export function initAssetsSidebar(
 
   return {
     appendSvgString,
+    handleIncomingFiles,
     switchBatchIndex,
     removeIconFromBatch,
     syncBatchUI,
     syncFitMode,
     syncExportControls,
+    triggerFilePicker: () => fileInput?.click(),
     destroy,
   };
 }

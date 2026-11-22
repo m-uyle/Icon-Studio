@@ -1,3 +1,6 @@
+import { getPasteShortcutLabel } from "../../../shared/lib/index.js";
+import { renderPromptPill } from "../../../shared/ui/index.js";
+
 export const canvasViewportTemplate = `
         <section class="viewport-area" id="viewportArea">
           <div class="pan-zoom-container" id="panZoomContainer">
@@ -20,6 +23,13 @@ export const canvasViewportTemplate = `
               </div>
             </div>
           </div>
+
+          <!-- Floating Canvas Empty Prompt -->
+          ${renderPromptPill({
+            id: "viewportEmptyState",
+            shortcut: getPasteShortcutLabel(),
+            className: "is-hidden",
+          })}
 
           <!-- Floating HUD Pill Left -->
           <div class="floating-hud-pill viewport-hud-left">

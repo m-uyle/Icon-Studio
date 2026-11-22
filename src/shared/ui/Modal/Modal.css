@@ -1,0 +1,155 @@
+@layer components {
+  /* Native dialog container in top-layer */
+  dialog.ui-dialog {
+    position: fixed;
+    inset: 0;
+    max-width: calc(100vw - var(--space-6));
+    max-height: calc(100vh - var(--space-6));
+    max-height: calc(100dvh - var(--space-6));
+    padding: 0;
+    margin: auto;
+    overflow: visible;
+    overscroll-behavior: contain;
+    outline: none;
+    background: transparent;
+    border: none;
+    transform: translateZ(0);
+  }
+
+  dialog.ui-dialog::backdrop {
+    background: var(--surface-backdrop);
+    backdrop-filter: blur(var(--space-2));
+  }
+
+  /* Modal Surface Shell with Pure Concentric Corner Geometry */
+  .ui-modal {
+    --modal-pad-corner: calc(var(--space-4) + var(--space-3));
+    --modal-corner-radius: calc(var(--ctrl-h-md) / 2 + var(--modal-pad-corner));
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+    color: var(--ink-primary);
+    background: var(--surface-card);
+    border: var(--divider-w) solid var(--border-divider);
+    border-radius: var(--modal-corner-radius);
+    box-shadow: var(--shadow-floating);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .ui-modal--sm {
+    max-width: 26rem;
+  }
+
+  .ui-modal--md {
+    max-width: 34rem;
+  }
+
+  .ui-modal--lg {
+    max-width: 44rem;
+  }
+
+  /* Header (Airy layout, concentric close button) */
+  .ui-modal__header {
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: var(--modal-pad-corner) var(--modal-pad-corner) var(--space-5)
+      var(--modal-pad-corner);
+  }
+
+  .ui-modal__titles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .ui-modal__title {
+    margin: 0;
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    line-height: 1.25;
+    color: var(--ink-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .ui-modal__description {
+    margin: 0;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+    color: var(--ink-secondary);
+  }
+
+  .ui-modal__close {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: var(--ctrl-h-md);
+    height: var(--ctrl-h-md);
+    padding: 0;
+    color: var(--ink-secondary);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    transition:
+      background-color var(--tr-fast),
+      color var(--tr-fast),
+      transform var(--tr-fast);
+  }
+
+  .ui-modal__close:hover {
+    color: var(--ink-primary);
+    background: var(--surface-ctrl-hover);
+  }
+
+  .ui-modal__close:active {
+    background: var(--surface-ctrl-pressed);
+    transform: scale(0.94);
+  }
+
+  .ui-modal__close:focus-visible {
+    outline: 0.125rem solid var(--border-focus);
+    outline-offset: 0.125rem;
+  }
+
+  /* Body (Airy padding, generous rhythm) */
+  .ui-modal__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--modal-pad-corner);
+    padding: 0 var(--modal-pad-corner) var(--modal-pad-corner);
+  }
+
+  /* Footer (Seamless pure surface with concentric corner geometry) */
+  .ui-modal__footer {
+    --modal-checkbox-w: 1rem;
+
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--modal-pad-corner) var(--modal-pad-corner)
+      calc(
+        var(--modal-pad-corner) +
+        (var(--ctrl-h-md) - var(--modal-checkbox-w)) /
+        2
+      );
+    background: transparent;
+    border-top: none;
+  }
+
+  .ui-modal__actions {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .ui-modal__actions .ui-btn {
+    padding: 0 var(--space-4);
+  }
+}

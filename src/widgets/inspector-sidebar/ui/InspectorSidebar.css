@@ -64,4 +64,30 @@
   .inspector-sidebar.is-matrix-mode .qa-canvas-only {
     display: none;
   }
+
+  .inspector-sidebar__footer {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--space-1) var(--space-4) var(--space-2);
+  }
+
+  .inspector-sidebar__author {
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-regular);
+    line-height: 1;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    opacity: 0.7;
+    transition:
+      opacity 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .inspector-sidebar__author:hover {
+    color: var(--ink-secondary);
+    opacity: 1;
+  }
 }

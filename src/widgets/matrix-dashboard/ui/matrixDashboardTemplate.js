@@ -1,5 +1,17 @@
 export const matrixDashboardTemplate = `
         <section class="matrix-area app-scroll is-hidden" id="matrixArea">
+          <div class="matrix-empty-prompt is-hidden" id="matrixEmptyBanner">
+            <span>No icon loaded</span>
+            <span class="matrix-empty-prompt__sep">·</span>
+            <button
+              class="ui-link-btn"
+              id="btnMatrixLoadSamples"
+              type="button"
+            >
+              Try sample icons
+            </button>
+          </div>
+
           <div class="matrix-container">
             <!-- SECTION 1: Scale & Raster -->
             <div class="matrix-card">

@@ -1,0 +1,35 @@
+@layer components {
+  /* --- Floating Canvas Prompt Pill (Elevated, borderless, larger than HUD) --- */
+  .ui-prompt-pill {
+    position: absolute;
+    bottom: calc(var(--hud-offset) + var(--ctrl-h-sm) + var(--space-6));
+    left: 50%;
+    z-index: var(--z-control);
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    justify-content: center;
+    height: var(--ctrl-h-lg);
+    padding: 0 var(--space-5);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    line-height: 1;
+    color: var(--ink-secondary);
+    white-space: nowrap;
+    pointer-events: auto;
+    user-select: none;
+    background: var(--surface-hud);
+    border: none;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-floating);
+    backdrop-filter: blur(1rem);
+    transform: translateX(-50%);
+    transition:
+      opacity var(--tr-base),
+      transform var(--tr-base);
+  }
+
+  .ui-prompt-pill.is-hidden {
+    display: none;
+  }
+}

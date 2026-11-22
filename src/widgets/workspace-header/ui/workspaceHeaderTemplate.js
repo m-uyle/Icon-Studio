@@ -31,6 +31,27 @@ export const workspaceHeaderTemplate = `
 
           <div class="workspace-header__right">
             <button
+              aria-label="Help and shortcuts"
+              class="ui-btn ui-btn--icon ui-btn--pill"
+              data-tooltip="Help & Shortcuts (?)"
+              id="btnHelp"
+              type="button"
+            >
+              <svg
+                class="workspace-header__action-icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M8 8a4 4 0 1 1 6.3 3.3c-1.3 1-2.3 1.7-2.3 3.7" />
+                <line x1="12" x2="12.01" y1="19" y2="19" />
+              </svg>
+            </button>
+
+            <button
               aria-label="Reset all settings"
               class="ui-btn ui-btn--icon ui-btn--pill"
               data-tooltip="Reset settings (24×24)"

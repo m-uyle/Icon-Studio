@@ -2,6 +2,7 @@ export {
   copyToClipboard,
   createUniqueId,
   escapeHtml,
+  getPasteShortcutLabel,
   sanitizeFilename,
   sanitizeIdentifier,
   triggerBlobDownload,
